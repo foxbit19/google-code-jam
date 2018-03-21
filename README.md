@@ -1,2 +1,2 @@
 # google-code-jam
-Solutions to Google code jam sessions
+Solutions to Google code jam sessions in nodejs
