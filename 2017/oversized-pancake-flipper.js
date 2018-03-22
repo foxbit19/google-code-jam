@@ -1,10 +1,15 @@
 const readline = require('readline');
 const fs = require('fs')
 
+var outputFile = "output.out"
 var T
 var S
 var K
 var lineCounter = 1;
+
+if (fs.exists(outputFile))
+    fs.unlinkSync(outputFile, (err) => {
+    });
 
 const reader = readline.createInterface({
     input: fs.createReadStream(process.argv[2]),
@@ -21,20 +26,22 @@ reader.on('line', (line) => {
         S = split[0].trim()
         K = split[1]
 
-        console.log("Case #" + lineCounter++ + ": " + checkTimes(S, K))
+        fs.appendFileSync(outputFile, "Case #" + lineCounter++ + ": " + checkTimes(S, K) + "\n", 'utf8', (err) => {
+            // saved!
+        })
     }
 })
 
 function checkTimes(S, K) {
-    var flips = [];
+    var flips = new Array(S.length);
     var flip = 0
     var needle;
 
-    for (let i = 0; i < S.length; i++) {
+    for (let i = 0; i < flips.length; i++)
         flips[i] = 0;
-    }
 
     for (let i = 0; i < S.length; i++) {
+        //console.log(flips + " i:"+i)
         if (flips[i] % 2 == 0)
             needle = '-';
         else
@@ -47,9 +54,10 @@ function checkTimes(S, K) {
 
             flip++;
 
-            for (let j = i; j < i + K; j++) {
-                flips[j]++;
+            for (let j = 0; j < K; j++) {
+                flips[j + i]++;
             }
+            //console.log(flips + " i:"+i+" K:"+K)
         }
     }
 
