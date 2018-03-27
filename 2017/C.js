@@ -28,8 +28,6 @@ reader.on('line', (line) => {
 function solve() {
     var pivot;
     var head;
-    var max;
-    var min;
     var Ls;
     var Rs;
     var queue = new Queue();
@@ -37,32 +35,25 @@ function solve() {
     queue.enqueue(N);
 
     for (var i = 0; i < K; i++) {
-        do {
-            head = queue.dequeue();
-        } while (head <= 0);
-
+        head = queue.dequeue();
         pivot = findPivot(head);
-        Ls = (pivot - 1);
+        Ls = pivot == 0 ? 0 : (pivot - 1);
         Rs = head - pivot;
 
         if (Ls >= Rs) {
-            min = Rs;
-            max = Ls;
             queue.enqueue(Ls);
             queue.enqueue(Rs);
         }
         else {
-            min = Ls;
-            max = Rs;
             queue.enqueue(Rs);
             queue.enqueue(Ls);
         }
     }
 
-    return max + ' ' + min;
+    return Math.max(Ls, Rs) + ' ' + Math.min(Ls, Rs);
 }
 
 function findPivot(size) {
-    if(size <= 0) return 0;
+    if (size <= 0) return 0;
     else return Math.floor(size / 2) + (size % 2);
 }
