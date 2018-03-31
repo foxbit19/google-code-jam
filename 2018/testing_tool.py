@@ -37,9 +37,9 @@ Windows users:
 
 # Hard-coded list for numbers to guess. You can modify this list, as well as
 # A, B, N below as you wish.
-CORRECT_GUESS_LIST = [23, 17, 8, 1, 5]
+CORRECT_GUESS_LIST = [3456, 1447, 8000, 100000, 5432, 654, 655, 1234, 99999, 123456, 3456, 1447, 8000, 100000, 5432, 654, 655, 1234, 99999, 123456]
 A = 0
-B = 100000000
+B = 1000000000
 N = 100000000
 assert (A < min(CORRECT_GUESS_LIST)) and (max(CORRECT_GUESS_LIST) <= B)
 NUM_TEST_CASES = len(CORRECT_GUESS_LIST)
